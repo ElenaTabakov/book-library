@@ -1,5 +1,5 @@
 import { AbstractView } from "../../common/view.js";
-
+import onChange from "on-change";
 export class MainView extends AbstractView {
     state = {
         list: [],
@@ -11,12 +11,19 @@ export class MainView extends AbstractView {
         super();
         this.setTitle('Book search');
         this.appState = appState;
+        this.appState = onChange(this.appState, this.appStateHook.bind(this))
     }
 
+    appStateHook(path){
+        if(path === 'favorites'){
+            console.log(path)
+        }
+    }
     render() {
         const main = document.createElement('div');
         main.innerHTML = `Favorites: ${this.appState.favorites.length}`;
         this.app.innerHTML = ''; 
         this.app.append(main);
+        // this.appState.favorites.push('di');
     }
 }
