@@ -1106,6 +1106,36 @@
     onChange.target = proxy => proxy?.[TARGET] ?? proxy;
     onChange.unsubscribe = proxy => proxy?.[UNSUBSCRIBE] ?? proxy;
 
+    class DivComponent{
+        constructor(){
+            this.element = document.createElement('div');
+        }
+        render(){
+            this.element;
+        }
+    }
+
+    class Header extends DivComponent {
+        constructor(appState) {
+            super();
+            this.appState = appState;
+        }
+
+        render() {
+            this.element.innerHTML = '';
+            this.element.classList.add('header');
+            this.element.innerHTML = `
+        <div class="container">   
+            <div class="d-flex">
+            <div class="col-md-5 logo"><img src="/static/images/logo_b.png" width="50"/></div>
+            <div class="col-md-7">${this.appState.favorites.length}</div>
+            </div>
+        </div>
+        `;
+            return this.element;
+        }
+    }
+
     class MainView extends AbstractView {
         state = {
             list: [],
@@ -1129,8 +1159,13 @@
             const main = document.createElement('div');
             main.innerHTML = `Favorites: ${this.appState.favorites.length}`;
             this.app.innerHTML = ''; 
+            this.renderHeader();
             this.app.append(main);
-            // this.appState.favorites.push('di');
+        }
+
+        renderHeader(){
+            const header = new Header(this.appState).render();
+            this.app.prepend(header);
         }
     }
 
