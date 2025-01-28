@@ -1,9 +1,17 @@
-.d-flex{
+
+.header_container{
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.menu__item a{
     display: flex;
+    align-items: center;
+    gap:5px;
+    & img{
+        max-width: 20px;
+    }
 }
-.col-md-5{
-    flex:0 0 20%;
-}
-.col-md-7{
-    flex:0 0 80%;
+.menu{
+    gap:15px;
 }
