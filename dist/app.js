@@ -1122,7 +1122,6 @@
         }
 
         render() {
-            this.element.innerHTML = '';
             this.element.classList.add('header');
             this.element.innerHTML = `
             <div class="container">  
